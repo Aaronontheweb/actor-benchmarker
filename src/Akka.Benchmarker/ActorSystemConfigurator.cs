@@ -15,11 +15,11 @@ namespace Akka.Benchmarker;
 /// </summary>
 /// <typeparam name="TActor">
 ///     The type of actor under test - must be made available inside the <see cref="ActorRegistry" />
-///     by the time <see cref="ConfigureAction" /> exits.
+///     by the time <see cref="ConfigureActorSystem" /> exits.
 /// </typeparam>
 public sealed class ActorSystemConfigurator<TActor>(
-    Action<AkkaConfigurationBuilder, IBenchmarkConfiguration> configureAction,
-    Func<IEnumerable<string>, IBenchmarkConfiguration> actorIds,
+    Action<AkkaConfigurationBuilder, IServiceProvider, IBenchmarkConfiguration> configureActorSystem,
+    Func<IBenchmarkConfiguration, IEnumerable<string>> actorIds,
     Action<IServiceCollection, IBenchmarkConfiguration> configureServices)
     where TActor : ActorBase
 {
@@ -33,10 +33,10 @@ public sealed class ActorSystemConfigurator<TActor>(
     ///     <see cref="AkkaConfigurationBuilder" />
     ///     and a user-defined <see cref="IBenchmarkConfiguration" />.
     /// </summary>
-    public Action<AkkaConfigurationBuilder, IBenchmarkConfiguration> ConfigureAction { get; } = configureAction;
+    public Action<AkkaConfigurationBuilder, IServiceProvider, IBenchmarkConfiguration> ConfigureActorSystem { get; } = configureActorSystem;
 
     /// <summary>
     ///     Produces a finite set of actor IDs that will be used to create the actors under test.
     /// </summary>
-    public Func<IEnumerable<string>, IBenchmarkConfiguration> ActorIds { get; } = actorIds;
+    public Func<IBenchmarkConfiguration, IEnumerable<string>> ActorIds { get; } = actorIds;
 }
