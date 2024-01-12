@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Benchmarker.App", "src\Akka.Benchmarker.App\Akka.Benchmarker.App.csproj", "{7EB7F53A-9A94-48EB-A7D9-D7D93DE0CEB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.Benchmarker", "src\Akka.Benchmarker\Akka.Benchmarker.csproj", "{14034AF9-2B10-4EFF-933E-1B94777C345C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{8DA62301-4525-484C-A99C-A43C94406E1A}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +22,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7EB7F53A-9A94-48EB-A7D9-D7D93DE0CEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7EB7F53A-9A94-48EB-A7D9-D7D93DE0CEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7EB7F53A-9A94-48EB-A7D9-D7D93DE0CEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7EB7F53A-9A94-48EB-A7D9-D7D93DE0CEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14034AF9-2B10-4EFF-933E-1B94777C345C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14034AF9-2B10-4EFF-933E-1B94777C345C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14034AF9-2B10-4EFF-933E-1B94777C345C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14034AF9-2B10-4EFF-933E-1B94777C345C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
