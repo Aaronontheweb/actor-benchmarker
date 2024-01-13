@@ -5,7 +5,6 @@
 // -----------------------------------------------------------------------
 
 using Akka.Actor;
-using Microsoft.Extensions.Logging;
 
 namespace Akka.Benchmarker;
 
@@ -23,7 +22,6 @@ public interface IBenchmarkDefinition
 public sealed class ActorBenchmarkDefinition<TActor>(
     ActorSystemConfigurator<TActor> configurator,
     IActorMessageFlow<TActor> messageFlow,
-    Func<CompletionListener<TActor>> completionListenerFactory,
     IBenchmarkConfiguration[]? configurations = null) : IBenchmarkDefinition
     where TActor : ActorBase
 {
@@ -38,8 +36,6 @@ public sealed class ActorBenchmarkDefinition<TActor>(
     public ActorSystemConfigurator<TActor> Configurator { get; } = configurator;
 
     public IActorMessageFlow<TActor> MessageFlow { get; } = messageFlow;
-
-    public Func<CompletionListener<TActor>> CompletionListenerFactory { get; } = completionListenerFactory;
     
     public IEnumerable<IActorBenchmark> CreateBenchmarks()
     {

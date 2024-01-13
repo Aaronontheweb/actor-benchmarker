@@ -38,8 +38,6 @@ public sealed class ActorBenchmark<TActor>(
     public IActorMessageFlow<TActor> MessageFlow { get; } = messageFlow;
 
     public ActorSystemConfigurator<TActor> Configurator { get; } = configurator;
-
-    public CompletionListener<TActor> CompletionListener { get; private set; } = null!;
     
     public IHost? Host { get; private set; } = null;
     
@@ -49,6 +47,7 @@ public sealed class ActorBenchmark<TActor>(
     public IActorRef? HeadActor { get; private set; }
     
     private string[] ActorIds { get; set; } = Array.Empty<string>();
+    private Task[] Flows { get; set; } = Array.Empty<Task>();
     
     public async Task<(int totalActors, int messagesPerActor)> Setup(CancellationToken ct)
     {
@@ -83,15 +82,15 @@ public sealed class ActorBenchmark<TActor>(
         // assert that the number of actors is greater than 0
         if (ActorIds.Length == 0)
             throw new ArgumentOutOfRangeException(nameof(Configurator), "Configurator.ActorIds must yield at least one actor ID");
-        
-        var messagesPerActor = MessageFlow.CreateMessagesForActor(ActorIds.First()).Count();
+
+        var messagesPerActor = MessageFlow.TotalMessages;
         
         // assert that the number of messages per actor is greater than 0
         if (messagesPerActor == 0)
             throw new ArgumentOutOfRangeException(nameof(MessageFlow), "Must have at least one message per actor");
         
-        // initialize the completion listener
-        await CompletionListener.Setup(ct);
+        // create the message flows
+        Flows = new Task[ActorIds.Length];
         
         // done
         return (ActorIds.Length, messagesPerActor);
@@ -106,14 +105,11 @@ public sealed class ActorBenchmark<TActor>(
         for(var i = 0; i < ActorIds.Length; i++)
         {
             var actorId = ActorIds[i];
-            var messages = MessageFlow.CreateMessagesForActor(actorId);
-            foreach (var message in messages)
-            {
-                HeadActor!.Tell(message, ActorRefs.NoSender);
-            }
+            var flow = MessageFlow.ExecuteSingleActorInteractions(HeadActor!, actorId);
+            Flows[i] = flow;
         }
-        
-        await CompletionListener.WaitForCompletion(ct);
+
+        await Task.WhenAll(Flows);
     }
     
     public async Task Teardown(CancellationToken ct)
