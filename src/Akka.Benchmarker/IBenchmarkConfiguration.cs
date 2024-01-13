@@ -59,7 +59,8 @@ public sealed class DefaultBenchmarkConfiguration : IBenchmarkConfiguration
     }
     
     public static DefaultBenchmarkConfiguration Instance { get; } = new();
-    
+
+    public int NumberOfActorSystems { get; } = 1;
     public string FriendlyConfigurationName { get; } = "Default";
     
     public string ActorSystemName { get; } = "BenchmarkSys";
