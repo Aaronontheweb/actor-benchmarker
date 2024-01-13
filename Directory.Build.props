@@ -1,17 +1,26 @@
 <Project>
-    <PropertyGroup>
-        <Copyright>Copyright © 2023 Your Company</Copyright>
-        <NoWarn>$(NoWarn);CS1591</NoWarn>
-        <VersionPrefix>1.0.0</VersionPrefix>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Build">
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Dependencies">
-        <PbmVersion>1.4.0</PbmVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Copyright>Copyright © 2015-2024 Aaron Stannard</Copyright>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <PackageReleaseNotes>* First release of Akka.Benchmarker, released under the Aaron.Akka.Benchmarker NuGet prefix.</PackageReleaseNotes>
+    <Authors>Aaronontheweb</Authors>
+    <PackageProjectUrl>https://github.com/Aaronontheweb/actor-benchmarker</PackageProjectUrl>
+    <PackageTags>akka.net, benchmarks, akakdotnet, performance, perf, throughput</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <Description>
+           Tooling for generating automated Akka.NET end-to-end benchmarks for actors. Think big, "macro" benchmarks - not your traditional Benchmark.NET micro-benchmarks you often see on Twitter et al.
+    </Description>
+  </PropertyGroup>
+  <PropertyGroup Label="Build">
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)\logo.png" Pack="true" Visible="false" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" Visible="false" PackagePath="\" />
+  </ItemGroup>
 </Project>
