@@ -47,15 +47,17 @@ public class End2EndTests
     public async Task ClusteredAndBasicCase()
     {
         // arrange
-        var actorSystemConfigurator = new ActorSystemConfigurator<ActorUnderTest>(
-            (builder, _, benchmarkConfiguration) => builder.ConfigureActorUnderTest(benchmarkConfiguration),
-            _ => Enumerable.Range(0, 100).Select(c => $"actor-{c}"));
+        var actorSystemConfigurator = 
+            new ActorSystemConfigurator<ActorUnderTest>(
+                (builder, _, benchmarkConfiguration) => builder.ConfigureActorUnderTest(benchmarkConfiguration),
+                _ => Enumerable.Range(0, 100).Select(c => $"actor-{c}"));
 
         var benchmarkDefinition =
-            new ActorBenchmarkDefinition<ActorUnderTest>(actorSystemConfigurator, new ActorMessagingFlow(), new IBenchmarkConfiguration[]
-            {
-                DefaultBenchmarkConfiguration.Instance, new ClusteredBenchmarkConfig()
-            });
+            new ActorBenchmarkDefinition<ActorUnderTest>(actorSystemConfigurator, new ActorMessagingFlow(), 
+            [
+                DefaultBenchmarkConfiguration.Instance, // local, 1 ActorSystem 
+                new ClusteredBenchmarkConfig() // clustered, 1 ShardRegion spread across 3 ActorSystems
+            ]);
         
         // act
         var actorBenchmarks = benchmarkDefinition.CreateBenchmarks().ToList();
