@@ -4,6 +4,14 @@ Tooling for generating automated [Akka.NET](https://getakka.net/) end-to-end ben
 > ![NOTE]
 > This library is an experiment and not meant for production use.
 
+## Installation Instructions
+
+Install this package via the [Aaron.Akka.Benchmarker package on NuGet](https://www.nuget.org/packages/Aaron.Akka.Benchmarker):
+
+```shell
+PM> Install-Package Aaron.Akka.Benchmarker
+```
+
 ## Benefits of Akka.Benchmarker
 
 Why use this library?
