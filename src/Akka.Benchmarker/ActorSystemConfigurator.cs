@@ -20,13 +20,13 @@ namespace Akka.Benchmarker;
 public sealed class ActorSystemConfigurator<TActor>(
     Action<AkkaConfigurationBuilder, IServiceProvider, IBenchmarkConfiguration> configureActorSystem,
     Func<IBenchmarkConfiguration, IEnumerable<string>> actorIds,
-    Action<IServiceCollection, IBenchmarkConfiguration> configureServices)
+    Action<IServiceCollection, IBenchmarkConfiguration>? configureServices = null)
     where TActor : ActorBase
 {
     /// <summary>
     /// Used to configure the DI container for a given benchmark.
     /// </summary>
-    public Action<IServiceCollection, IBenchmarkConfiguration> ConfigureServices { get; } = configureServices;
+    public Action<IServiceCollection, IBenchmarkConfiguration> ConfigureServices { get; } = configureServices ?? ((_, _) => {});
 
     /// <summary>
     ///     Configures the underlying ActorSystem for a given benchmark - accepts the Akka.Hosting

@@ -5,6 +5,7 @@
 // -----------------------------------------------------------------------
 
 using Akka.Actor;
+using Microsoft.Extensions.Hosting;
 
 namespace Akka.Benchmarker;
 
@@ -13,6 +14,11 @@ namespace Akka.Benchmarker;
 /// </summary>
 public interface IBenchmarkConfiguration
 {
+    /// <summary>
+    /// The number of <see cref="ActorSystem"/> instances participating in this benchmark.
+    /// </summary>
+    int NumberOfActorSystems { get; }
+    
     /// <summary>
     ///     The human-readable name for this configuration.
     /// </summary>
@@ -30,6 +36,13 @@ public interface IBenchmarkConfiguration
     ValueTask PreHostSetup(CancellationToken ct) => ValueTask.CompletedTask;
     
     /// <summary>
+    /// If we need to do something like manually cluster the <see cref="ActorSystem"/> instances in all <see cref="IHost"/>s before the benchmark starts, do it here.
+    /// </summary>
+    /// <param name="hosts">All of the hosts participating in this benchmark instance.</param>
+    /// <param name="ct">Cancellation token.</param>
+    ValueTask PostHostSetup(IHost[] hosts, CancellationToken ct) => ValueTask.CompletedTask;
+    
+    /// <summary>
     /// Need to tear down something like a TestContainer or a Docker container after the benchmark completes? Do it here.
     /// </summary>
     /// <param name="ct">Cancellation token.</param>
@@ -41,12 +54,19 @@ public interface IBenchmarkConfiguration
 /// </summary>
 public sealed class DefaultBenchmarkConfiguration : IBenchmarkConfiguration
 {
+  
     private DefaultBenchmarkConfiguration()
     {
     }
     
     public static DefaultBenchmarkConfiguration Instance { get; } = new();
     
+    public static IBenchmarkConfiguration[] DefaultConfigurations { get; } =
+    [
+        Instance
+    ];
+
+    public int NumberOfActorSystems { get; } = 1;
     public string FriendlyConfigurationName { get; } = "Default";
     
     public string ActorSystemName { get; } = "BenchmarkSys";

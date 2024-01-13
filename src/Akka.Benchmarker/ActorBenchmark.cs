@@ -39,7 +39,7 @@ public sealed class ActorBenchmark<TActor>(
 
     public ActorSystemConfigurator<TActor> Configurator { get; } = configurator;
     
-    public IHost? Host { get; private set; } = null;
+    public IHost[] Hosts { get; private set; } = Array.Empty<IHost>();
     
     /// <summary>
     /// The live <see cref="TActor"/> instance inside the <see cref="ActorSystem"/>.
@@ -54,24 +54,34 @@ public sealed class ActorBenchmark<TActor>(
         // first, need to do any pre-host setup
         await Configuration.PreHostSetup(ct);
         
-        var hostBuilder = new HostBuilder()
-            .ConfigureServices(services =>
-            {
-                // configure DI services, if necessary
-                Configurator.ConfigureServices(services, Configuration);
-                services.AddAkka(Configuration.ActorSystemName, (builder, provider) =>
+        foreach(var i in Enumerable.Range(0, Configuration.NumberOfActorSystems))
+        {
+            var hostBuilder = new HostBuilder()
+                .ConfigureServices(services =>
                 {
-                    Configurator.ConfigureActorSystem(builder, provider, Configuration);
+                    // configure DI services, if necessary
+                    Configurator.ConfigureServices(services, Configuration);
+                    services.AddAkka(Configuration.ActorSystemName, (builder, provider) =>
+                    {
+                        Configurator.ConfigureActorSystem(builder, provider, Configuration);
+                    });
                 });
-            });
         
-        Host = hostBuilder.Build();
+            var host = hostBuilder.Build();
+            Hosts = Hosts.Append(host).ToArray();
+        }
         
         // validate that the service can start up correctly
-        await Host.StartAsync(ct);
+        await Task.WhenAll(Hosts.Select(c => c.StartAsync(ct)));
+
+        // run any post-host setup
+        await Configuration.PostHostSetup(Hosts, ct);
+        
+        // grab the first Host, which we're going to use as the front-end for messaging the actor
+        var firstHost = Hosts.First();
         
         // ensure that TActor is available in the ActorRegistry
-        var actorRegistry = Host.Services.GetRequiredService<ActorRegistry>();
+        var actorRegistry = firstHost.Services.GetRequiredService<ActorRegistry>();
 
         // if this times out or fails, the benchmark will not run (by design)
         HeadActor = await actorRegistry.GetAsync<TActor>(ct);
@@ -105,7 +115,7 @@ public sealed class ActorBenchmark<TActor>(
         for(var i = 0; i < ActorIds.Length; i++)
         {
             var actorId = ActorIds[i];
-            var flow = MessageFlow.ExecuteSingleActorInteractions(HeadActor!, actorId);
+            var flow = MessageFlow.ExecuteSingleActorInteractions(HeadActor!, actorId, ct);
             Flows[i] = flow;
         }
 
@@ -116,7 +126,8 @@ public sealed class ActorBenchmark<TActor>(
     {
         try
         {
-            await Host!.StopAsync(ct);
+            // shut all of the hosts down
+            await Task.WhenAll(Hosts.Select(c => c.StopAsync(ct)));
         }
         catch (Exception ex)
         {

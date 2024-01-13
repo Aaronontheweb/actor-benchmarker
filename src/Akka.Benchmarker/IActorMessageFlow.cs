@@ -28,6 +28,7 @@ public interface IActorMessageFlow<TActor> where TActor : ActorBase
     /// </summary>
     /// <param name="actorRoot">The root actor we're going to be messaging, registered inside the <see cref="ActorRegistry"/> as <see cref="TActor"/>.</param>
     /// <param name="actorId">The id of the specific instance of this actor.</param>
+    /// <param name="ct">A cancellation token for the operation</param>
     /// <returns>A Task that will complete once all of the messaging interactions with the actor are completed.</returns>
-    public Task ExecuteSingleActorInteractions(IActorRef actorRoot, string actorId);
+    public Task ExecuteSingleActorInteractions(IActorRef actorRoot, string actorId, CancellationToken ct);
 }
