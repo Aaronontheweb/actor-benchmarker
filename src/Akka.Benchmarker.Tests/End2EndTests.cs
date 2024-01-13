@@ -16,16 +16,6 @@ public class End2EndTests
     {
         _helper = helper;
     }
-
-    private void ConfigureLogging(IHostBuilder host)
-    {
-        host.ConfigureLogging(logger =>
-        {
-            logger.ClearProviders();
-            logger.AddProvider(new XUnitLoggerProvider(_helper, LogLevel.Information));
-            logger.AddFilter("Akka.*", LogLevel.Information);
-        });
-    }
     
     [Fact(DisplayName = "Should execute a basic benchmark with 1 actor system running locally, under a single configuration")]
     public async Task BasicTestCase()
