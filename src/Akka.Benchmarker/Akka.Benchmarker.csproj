@@ -5,15 +5,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>Aaron.Akka.Benchmarker</PackageId>
-        <Authors>Aaronontheweb</Authors>
-        <PackageProjectUrl>https://github.com/akkadotnet/akka.analyzers</PackageProjectUrl>
-        <PackageTags>akka.net, benchmarks, akakdotnet, performance, perf, throughput</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <PackageIcon>logo.png</PackageIcon>
-        <Description>
-               Tooling for generating automated Akka.NET end-to-end benchmarks for actors. Think big, "macro" benchmarks - not your traditional Benchmark.NET micro-benchmarks you often see on Twitter et al.
-        </Description>
     </PropertyGroup>
 
     <ItemGroup>

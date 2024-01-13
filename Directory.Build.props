@@ -4,6 +4,15 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <VersionPrefix>0.1.0</VersionPrefix>
     <PackageReleaseNotes>* First release of Akka.Benchmarker, released under the Aaron.Akka.Benchmarker NuGet prefix.</PackageReleaseNotes>
+    <Authors>Aaronontheweb</Authors>
+    <PackageProjectUrl>https://github.com/Aaronontheweb/actor-benchmarker</PackageProjectUrl>
+    <PackageTags>akka.net, benchmarks, akakdotnet, performance, perf, throughput</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <Description>
+           Tooling for generating automated Akka.NET end-to-end benchmarks for actors. Think big, "macro" benchmarks - not your traditional Benchmark.NET micro-benchmarks you often see on Twitter et al.
+    </Description>
   </PropertyGroup>
   <PropertyGroup Label="Build">
     <LangVersion>latest</LangVersion>
