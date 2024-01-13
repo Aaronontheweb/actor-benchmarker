@@ -115,7 +115,7 @@ public sealed class ActorBenchmark<TActor>(
         for(var i = 0; i < ActorIds.Length; i++)
         {
             var actorId = ActorIds[i];
-            var flow = MessageFlow.ExecuteSingleActorInteractions(HeadActor!, actorId);
+            var flow = MessageFlow.ExecuteSingleActorInteractions(HeadActor!, actorId, ct);
             Flows[i] = flow;
         }
 

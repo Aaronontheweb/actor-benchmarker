@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentAssertions" />
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="xunit"/>
         <PackageReference Include="xunit.runner.visualstudio">
@@ -23,10 +24,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Akka.Benchmarker\Akka.Benchmarker.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Utilities\" />
     </ItemGroup>
 
 </Project>

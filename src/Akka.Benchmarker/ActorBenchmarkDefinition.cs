@@ -28,7 +28,7 @@ public sealed class ActorBenchmarkDefinition<TActor>(
     /// <summary>
     /// All of the possible configurations for this benchmark.
     /// </summary>
-    public IBenchmarkConfiguration[] Configurations { get; } = configurations ?? Array.Empty<IBenchmarkConfiguration>();
+    public IBenchmarkConfiguration[] Configurations { get; } = configurations ?? DefaultBenchmarkConfiguration.DefaultConfigurations;
 
     /// <summary>
     /// Used to configure the underlying ActorSystem for a given benchmark - accepts the Akka.Hosting

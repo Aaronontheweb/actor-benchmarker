@@ -54,11 +54,17 @@ public interface IBenchmarkConfiguration
 /// </summary>
 public sealed class DefaultBenchmarkConfiguration : IBenchmarkConfiguration
 {
+  
     private DefaultBenchmarkConfiguration()
     {
     }
     
     public static DefaultBenchmarkConfiguration Instance { get; } = new();
+    
+    public static IBenchmarkConfiguration[] DefaultConfigurations { get; } =
+    [
+        Instance
+    ];
 
     public int NumberOfActorSystems { get; } = 1;
     public string FriendlyConfigurationName { get; } = "Default";
