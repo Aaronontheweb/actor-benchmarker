@@ -36,6 +36,16 @@ public interface IBenchmarkConfiguration
     ValueTask PreHostSetup(CancellationToken ct) => ValueTask.CompletedTask;
     
     /// <summary>
+    /// If you need to touch the <see cref="HostBuilder"/> before it starts up, do it here.
+    /// </summary>
+    /// <param name="hostBuilder">The host builder.</param>
+    /// <param name="ct">Cancellation token.</param>
+    /// <remarks>
+    /// This method is used for doing things like configuring logging or host configuration values.
+    /// </remarks>
+    ValueTask HostBuilderSetup(HostBuilder hostBuilder, CancellationToken ct) => ValueTask.CompletedTask;
+    
+    /// <summary>
     /// If we need to do something like manually cluster the <see cref="ActorSystem"/> instances in all <see cref="IHost"/>s before the benchmark starts, do it here.
     /// </summary>
     /// <param name="hosts">All of the hosts participating in this benchmark instance.</param>
