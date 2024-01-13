@@ -15,8 +15,16 @@ Why use this library?
 
 ## Designing a Benchmark
 
-The idea behind Akka.Benchmarker (the `namespace` for this library) is to do the following:
+The idea behind Akka.Benchmarker (the `namespace` for this library) is to choose the following:
 
 1. **Code Under Test**: choose a single "head actor" that represents a set of related entities - in Akka.Cluster parlance this would typically be a [`ShardRegion`](https://getakka.net/articles/clustering/cluster-sharding.html). In local Akka.NET this might be the aggregate root / parent actor for something like the [child-per-entity pattern](https://petabridge.com/blog/top-akkadotnet-design-patterns/). These actors typically perform complex work; have state; and are where the real "business" of your application is conducted. These actors might also interact with other dependent actors - that is totally fine: **we want all of that overhead and data included in our benchmark**.
 2. **Infrastructure Under Test**: need to use SQL Server, Redis, or MongoDb as part of your test configuration? Akka.Benchmarker will allow you to fire up and tear down external infrastructure dependencies like [Test Conatiners](https://testcontainers.com/). Again, **these are meant to be end to end benchmarks - real overhead is what we are trying to measure**.
-3. **Clusters or Single Actor Systems**: the `IBenchmarkConfiguration` construct in Akka.Benchmarker makes it very easy to say "give me a cluster of 4 nodes" or "run as a single `ActorSystem`" for your benchmark. Implement your own `IBenchmarkConfiguration` types to help express this.
+3. **Clusters or Single Actor Systems**: the `IBenchmarkConfiguration` construct in Akka.Benchmarker makes it very easy to say "give me a cluster of 4 nodes" or "run as a single `ActorSystem`" for your benchmark. Implement your own `IBenchmarkConfiguration` types to help express this. You can run multiple `IBenchmarkConfiguration`s for the same code and infrastructure under test.
+
+## Implementing Your Design
+
+```
+TODO: going to test this with some live applications first
+```
+
+Copyright 2015-2024 Aaron Stannard [<aaronstannard.com>](https://aaronstannard.com/)

@@ -1,17 +1,17 @@
 <Project>
-    <PropertyGroup>
-        <Copyright>Copyright © 2023 Your Company</Copyright>
-        <NoWarn>$(NoWarn);CS1591</NoWarn>
-        <VersionPrefix>1.0.0</VersionPrefix>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Build">
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Dependencies">
-        <PbmVersion>1.4.0</PbmVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Copyright>Copyright © 2015-2024 Aaron Stannard</Copyright>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <PackageReleaseNotes>* First release of Akka.Benchmarker, released under the Aaron.Akka.Benchmarker NuGet prefix.</PackageReleaseNotes>
+  </PropertyGroup>
+  <PropertyGroup Label="Build">
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)\..\docs\images\akkalogo.png" Pack="true" Visible="false" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\..\README.md" Pack="true" Visible="false" PackagePath="\" />
+  </ItemGroup>
 </Project>
