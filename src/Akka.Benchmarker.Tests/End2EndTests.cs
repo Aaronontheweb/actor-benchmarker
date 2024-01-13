@@ -1,9 +1,5 @@
 using Akka.Benchmarker.Tests.Utilities;
 using FluentAssertions;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Akka.Hosting.Testkit;
-using Akka.Hosting.TestKit.Internals;
 using Xunit.Abstractions;
 
 namespace Akka.Benchmarker.Tests;

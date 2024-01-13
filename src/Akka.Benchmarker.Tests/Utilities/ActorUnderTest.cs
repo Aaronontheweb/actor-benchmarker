@@ -145,7 +145,7 @@ public static class AkkaHostingForActorUnderTest
         var props = Props.Create(() => new ActorUnderTest());
         return builder
             .WithRemoting("localhost", 0)
-            .WithClustering()
+            .WithClustering(new ClusterOptions(){ Roles = ["shards"] })
             .WithShardRegion<ActorUnderTest>("actor-under-test", (actorSystem, registry, resolver) => s => props,
                 CreateMessageExtractor(configuration),
                 new ShardOptions()
