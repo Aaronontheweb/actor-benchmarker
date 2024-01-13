@@ -1,6 +1,6 @@
 namespace Akka.Benchmarker.Tests;
 
-public class UnitTest1
+public class End2EndTests
 {
     [Fact]
     public void Test1()

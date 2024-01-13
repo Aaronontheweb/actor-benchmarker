@@ -5,6 +5,7 @@
 // -----------------------------------------------------------------------
 
 using Akka.Actor;
+using Microsoft.Extensions.Hosting;
 
 namespace Akka.Benchmarker;
 
@@ -13,6 +14,11 @@ namespace Akka.Benchmarker;
 /// </summary>
 public interface IBenchmarkConfiguration
 {
+    /// <summary>
+    /// The number of <see cref="ActorSystem"/> instances participating in this benchmark.
+    /// </summary>
+    int NumberOfActorSystems { get; }
+    
     /// <summary>
     ///     The human-readable name for this configuration.
     /// </summary>
@@ -28,6 +34,13 @@ public interface IBenchmarkConfiguration
     /// </summary>
     /// <param name="ct">Cancellation token.</param>
     ValueTask PreHostSetup(CancellationToken ct) => ValueTask.CompletedTask;
+    
+    /// <summary>
+    /// If we need to do something like manually cluster the <see cref="ActorSystem"/> instances in all <see cref="IHost"/>s before the benchmark starts, do it here.
+    /// </summary>
+    /// <param name="hosts">All of the hosts participating in this benchmark instance.</param>
+    /// <param name="ct">Cancellation token.</param>
+    ValueTask PostHostSetup(IHost[] hosts, CancellationToken ct) => ValueTask.CompletedTask;
     
     /// <summary>
     /// Need to tear down something like a TestContainer or a Docker container after the benchmark completes? Do it here.

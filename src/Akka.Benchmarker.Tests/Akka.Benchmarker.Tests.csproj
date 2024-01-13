@@ -25,4 +25,8 @@
       <ProjectReference Include="..\Akka.Benchmarker\Akka.Benchmarker.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Utilities\" />
+    </ItemGroup>
+
 </Project>
