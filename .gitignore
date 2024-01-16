@@ -25,6 +25,9 @@ tools/
 # VS Code files
 .vscode/
 
+# Benchmark.NET output
+BenchmarkDotNet.Artifacts/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
