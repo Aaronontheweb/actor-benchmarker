@@ -4,7 +4,7 @@
   </PropertyGroup>
   <!-- Akka.NET Package Versions -->
   <ItemGroup>
-    <PackageVersion Include="Akka.Hosting" Version="1.5.15" />
+    <PackageVersion Include="Akka.Hosting" Version="1.5.16" />
     <PackageVersion Include="Akka.Cluster.Hosting" Version="1.5.15" />
     <PackageVersion Include="Akka.Streams" Version="1.5.15" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.12" />
