@@ -4,7 +4,7 @@
   </PropertyGroup>
   <!-- Akka.NET Package Versions -->
   <ItemGroup>
-    <PackageVersion Include="Akka.Hosting" Version="1.5.15" />
+    <PackageVersion Include="Akka.Hosting" Version="1.5.17.1" />
     <PackageVersion Include="Akka.Cluster.Hosting" Version="1.5.15" />
     <PackageVersion Include="Akka.Streams" Version="1.5.15" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.12" />
@@ -12,7 +12,7 @@
   </ItemGroup>
   <!-- Testing Package Versions -->
   <ItemGroup>
-    <PackageVersion Include="Akka.Hosting.TestKit" Version="1.5.15" />
+    <PackageVersion Include="Akka.Hosting.TestKit" Version="1.5.17.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
