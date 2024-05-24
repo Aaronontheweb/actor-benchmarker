@@ -2,8 +2,8 @@
   <PropertyGroup>
     <Copyright>Copyright © 2015-2024 Aaron Stannard</Copyright>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <PackageReleaseNotes>* First release of Akka.Benchmarker, released under the Aaron.Akka.Benchmarker NuGet prefix.</PackageReleaseNotes>
+    <VersionPrefix>0.1.1</VersionPrefix>
+    <PackageReleaseNotes>* Downgraded default runtime from .NET 8 to .NET 6</PackageReleaseNotes>
     <Authors>Aaronontheweb</Authors>
     <PackageProjectUrl>https://github.com/Aaronontheweb/actor-benchmarker</PackageProjectUrl>
     <PackageTags>akka.net, benchmarks, akakdotnet, performance, perf, throughput</PackageTags>
